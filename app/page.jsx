@@ -44,6 +44,8 @@ export default function Home() {
     event.preventDefault();
     await addDoc(subscribers, {
       email: email.current.value,
+    }).then(() => {
+      getUsers();
     });
     email.current.value = "";
   };
@@ -53,6 +55,8 @@ export default function Home() {
     event.preventDefault();
     await updateDoc(doc(db, "digilab", "frontend"), {
       btn: btnText.current.value,
+    }).then(() => {
+      getDetails();
     });
     btnText.current = "";
   };
@@ -71,6 +75,8 @@ export default function Home() {
       getDownloadURL(snapshot.ref).then((downloadURL) => {
         updateDoc(doc(db, "digilab", "frontend"), {
           logo: downloadURL,
+        }).then(() => {
+          getDetails();
         });
       });
     });
@@ -79,11 +85,11 @@ export default function Home() {
 
   useEffect(() => {
     getDetails();
-  }, [updateBtnText]);
+  }, [setDetail]);
 
   useEffect(() => {
     getUsers();
-  }, [subscribeEmail]);
+  }, []);
 
   return (
     <main>
