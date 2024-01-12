@@ -30,7 +30,6 @@ export default function Home() {
 
   const getUsers = async () => {
     const snapshot = await getDocs(subscribers);
-    console.log(snapshot.size);
     const emails = [];
     snapshot.docs.forEach((doc) => {
       emails.push({ id: doc.id, ...doc.data() });
@@ -58,7 +57,7 @@ export default function Home() {
     }).then(() => {
       getDetails();
     });
-    btnText.current = "";
+    btnText.current.value = "";
   };
 
   const logo = useRef("");
